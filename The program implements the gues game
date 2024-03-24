@@ -1,0 +1,87 @@
+
+/******************************************************************************
+Yusuf Abdi
+
+*******************************************************************************/
+/*
+The program implements the guessing game
+*/
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+
+/*
+main function to start C application
+*/
+int main() {
+
+	//how many guesses the user has made for the rounds
+	int numGuesses[5];
+	int guess;  //user guess
+	int secret; //secret number
+	int i;      //loop control variable
+	int correct;//if correct guess
+
+	//generate random seed
+	srand(time(0));
+
+	//guessing game a total of 5 times in a row
+	for (i = 0; i < 5; i++) {
+
+		printf("==========================\n");
+		printf("CPU Says: Pick a number 1-10\n");
+		printf("==========================\n");
+
+		//generate the secret number between 1 and 10
+		secret = rand() % 10 + 1;
+
+		numGuesses[i] = 0;
+
+		//loop until correct guess
+		correct = 0;
+		while (correct == 0) {
+			//ask for a guess
+			printf("Make a guess: ");
+			scanf("%d", &guess);
+
+			if (guess > secret) {
+				printf("No guess lower!\n");
+			}
+			else if (guess < secret) {
+				printf("No guess higher!\n");
+			}
+			else {
+				printf("You got it!\n");
+				correct = 1;
+			}
+
+			numGuesses[i] += 1;
+
+		}//end while
+	}//end for
+
+  printf("=================================================\n");
+  printf("|Here are the results of your guessing abilities|\n");
+  printf("=================================================\n");
+
+  	//result of guessing game a total of 5 times in a row
+	for (i = 0; i < 5; i++) {
+
+  }
+
+	return 0;
+}
+
+/*
+Answers:
+1. If there is no hint, the guess will be taking the  longer road at the most worst case is 10. In this situation the user guesses: 1,2,3,4,5,6,7,8,9,10.
+
+2. At the case is hin, the user could guess the middle number like 5. When the user hint is lower, the secret is in [1:4]. Or, the secret is [6:1]. If the gues is not correct, the range numers of search is reduced to a half. However, the number of guess is log2(10) ~4
+
+At the case, the secret number is 7.
+
+User guesse number is middle which 5, the ranger of search is [6:10].
+User guesse number is middle which 8, the ranger of search is [6:7].
+User guesse number is middle which 2, the ranger of search is [7].
+At the end, user guesses 7 
+*/
